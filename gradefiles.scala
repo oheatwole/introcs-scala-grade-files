@@ -21,7 +21,7 @@ object gradefiles extends App {
     doubles
   }
 
-  def parseCSVRowOfInts(line : String, failValue : Int) : Array[Int] = {
+  def parseCSVRowOfInts(line : String, failValue : Integer) : Array[Integer] = {
 
     val tokens = line.split(",")
     val integers = Array.fill(tokens.length)(failValue)
@@ -31,7 +31,7 @@ object gradefiles extends App {
     integers
   }
 
-  def readCategoryFile(courseName : String) : (Int, Array[String], Array[Int], Array[Int]) = {
+  /*def readCategoryFile(courseName : String) : (Integer, Array[String], Array[Integer], Array[Integer]) = {
     val courseFileName = s"categories_$courseName.txt"
     val file = Source.fromFile(courseFileName)
     val lines = file.getLines
@@ -45,24 +45,23 @@ object gradefiles extends App {
     val columns = min(min(headerNames.length, quantitiesArray.length), weightsArray.length)
 
     (columns, headerNames, quantitiesArray, weightsArray)
-  }
-
-  val exampleHeading = "Exams, Homework, Project"
-  val exampleData = "10, a, 25, 35.6"
-
-  parseCSVHeader(exampleHeading) foreach println
-  parseCSVRowOfDoubles(exampleData, -1.0) foreach println
-
-  val results = readCategoryFile("comp150")
-  results match {
-    case (n, h, q, w) => {
-      println("There are $n columns of data")
-      println("Headings")
-      h foreach println
-      println("Quantities")
-      q foreach println
-      println("Weights")
-      w foreach println
+  } */
+   val n = file.getLines.length
+   val ids = Array.ofDim[String](n)
+   val last = Array.ofDim[String](n)
+   val first = Array.ofDim[String](n) 
+   var i = 0
+   for (line <- file.getLines){
+       val parts = parseCSVHeader(file.getLines.toString)
+       ids(i) = parts{0}
+       last(i) = parts{1}
+       first(i) = parts{2}
+       i = i +1
    }
- }
+   println(ids{0})
 }
+
+
+  
+ 
+
